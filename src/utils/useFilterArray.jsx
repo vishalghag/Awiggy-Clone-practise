@@ -1,6 +1,8 @@
+
+
 const useFilterArray = (filterArray,searchTxt) => {
 
-    let filterArrayData = filterArray.filter((ele) => ele.data.name.toLowerCase().trim().includes(searchTxt.toLowerCase()));
+    let filterArrayData = filterArray.filter((ele) => ele.info.name.toLowerCase().trim().includes(searchTxt.toLowerCase()));
 
     return filterArrayData
 }

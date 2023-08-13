@@ -6,7 +6,9 @@ import useFilterArray from "../utils/useFilterArray";
 import { SWIGGY_ALL_RESTURANT_URL } from "../constant";
 import useOnline from "../utils/useOnline";
 import UserContext from "../utils/UserContext";
-
+// const express = require("express")
+// const app = express()
+// const cors = require("cors")
 const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [filterArray, setFilterArray] = useState([]);
@@ -18,9 +20,14 @@ const Body = () => {
   }, []);
 
   const getSwiggyApi = async () => {
+    // app.use(
+    //   cors({
+    //     origin:"*"
+    //   })
+    // )
     const swiggyApi = await fetch(SWIGGY_ALL_RESTURANT_URL);
     const swiggyData = await swiggyApi.json();
-    let swiggyApiData = swiggyData?.data?.cards[2]?.data?.data?.cards;
+    let swiggyApiData = swiggyData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     console.log(swiggyApiData, "swiggdata");
     setFilterArray(swiggyApiData);
   };
@@ -51,7 +58,7 @@ const Body = () => {
     })
   }
 
-  return filterArray.length === 0 ? (
+  return filterArray && filterArray.length === 0 ? (
     <ShimmerHotelCardUI />
   ) : (
     <>
@@ -70,10 +77,10 @@ const Body = () => {
           <h2>No Hotel has searched</h2>
         ) : (
           filterArrayData.map((restro) => {
-            console.log(restro.data.id);
+            console.log(restro.info.id,'iddsssss');
             return (
-              <Link to={`resturant/${restro.data.id}`} key={restro.data.id}>
-                <RestuarentCard {...restro.data} />
+              <Link to={`resturant/${restro.info.id}`} key={restro.info.id}>
+                <RestuarentCard {...restro.info} />
               </Link>
             );
           })

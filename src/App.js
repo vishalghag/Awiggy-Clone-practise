@@ -11,6 +11,9 @@ import ResturantMenu from './components/ResturantMenu';
 import Profile from './components/Profile';
 import ShimmerHotelCardUI from './components/ShimmerHotelCardUI';
 import UserContext from './utils/UserContext';
+import { Provider } from 'react-redux';
+import store from './utils/store';
+import Cart from './components/Cart';
 // import Instamart from './components/Instamart';
 const Instamart = lazy(() => import('./components/Instamart'))
 
@@ -23,6 +26,7 @@ const AppLayout = () => {
 
   return (
     <>
+    <Provider store={store}>
     <UserContext.Provider value={{
       user:user,
       setUser:setUser
@@ -32,6 +36,7 @@ const AppLayout = () => {
       <Footer />
       </UserContext.Provider>
       {/* {console.log(ResturentList())} */}
+      </Provider>
     </>
   )
 }
@@ -67,6 +72,10 @@ const AppRouter = createBrowserRouter([
       {
         path:'/instamart',
         element: <Suspense fallback={<ShimmerHotelCardUI/>}><Instamart/></Suspense> 
+      },
+      {
+        path:'/cart',
+        element:<Cart/>
       }
     ]
   },
