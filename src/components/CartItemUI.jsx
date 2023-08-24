@@ -3,20 +3,16 @@ import { IMG_CDN_URL } from '../constant';
 import { removeItems } from '../utils/cartSlice';
 import { useState } from 'react';
 
-const CartItemUI = ({name, imageId,description,price,defaultPrice,id}) => {
+const CartItemUI = ({name, imageId,description,price,defaultPrice,id,setDiscountToggle}) => {
 
-   const [cardPrice,setCardPrice] = useState(0)
 
    const dispatch = useDispatch()
 
    const removeItem = (ids) => {
-      // console.log(ids,'cardUIII')
       dispatch(removeItems(ids))
+      setDiscountToggle(true)
    }
 
-   // const totalBill = (price) => {
-
-   // }
 
     return(
        <>

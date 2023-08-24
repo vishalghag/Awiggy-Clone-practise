@@ -20,11 +20,6 @@ const Body = () => {
   }, []);
 
   const getSwiggyApi = async () => {
-    // app.use(
-    //   cors({
-    //     origin:"*"
-    //   })
-    // )
     const swiggyApi = await fetch(SWIGGY_ALL_RESTURANT_URL);
     const swiggyData = await swiggyApi.json();
     let swiggyApiData = swiggyData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;

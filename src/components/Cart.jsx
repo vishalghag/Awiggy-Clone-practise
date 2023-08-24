@@ -16,7 +16,11 @@ const Cart = () => {
     useEffect(() => {
         let totalPrice = 0
         cartItems.map((itemPrices) => {
-            totalPrice+=(itemPrices.price/100)
+            if(itemPrices.price){
+                totalPrice+=(itemPrices.price/100)
+            }else{
+                totalPrice+=(itemPrices.defaultPrice/100)
+            }
         })
         setSum(totalPrice)
     },[cartItems])
@@ -48,7 +52,7 @@ const Cart = () => {
             <h2 className=" text-center font-bold text-lg">Total Bill:-{sum.toFixed(2)} </h2>
             </div>
             <div className=" flex">
-                {cartItems.map(items => <CartItemUI key={items.id} {...items} />)}
+                {cartItems.map(items => <CartItemUI key={items.id} {...items} setDiscountToggle={setDiscountToggle} />)}
             </div>
         </>
     )
